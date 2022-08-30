@@ -1,4 +1,4 @@
-const Card = ({ image, title }) => {
+const Card = ({ image, title, rating }) => {
   return (
     <div className="bg-yellow-500/50 w-40 h-auto py-2 rounded-lg grid place-content-center px-1">
       <div className="flex justify-center">
@@ -13,7 +13,9 @@ const Card = ({ image, title }) => {
         />
       </div>
       <h3 className="text-center font-bold text-white">{title}</h3>
-      <p className="text-center text-white">Konten</p>
+      <p className="text-center text-white font-light italic text-xs">
+        Rating {rating}
+      </p>
     </div>
   );
 };

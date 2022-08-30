@@ -1,5 +1,6 @@
 import { MdOutlineLocalMovies } from "react-icons/md";
 import { BsFillMoonStarsFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -8,7 +9,7 @@ const NavBar = () => {
         <div className="flex">
           <MdOutlineLocalMovies className="text-white w-8 h-8 mt-1 sm:w-11 sm:h-11" />
           <h1 className="text-white font-bold mt-2 ml-1 text-md sm:text-xl">
-            Movies
+            <Link to={"/"}>Movies</Link>
           </h1>
           <MdOutlineLocalMovies className="text-white w-8 h-8 mt-1 sm:w-11 sm:h-11" />
           <button>
@@ -16,10 +17,10 @@ const NavBar = () => {
           </button>
         </div>
         <button className="grid text-white font-bold mt-2 ml-1 text-md sm:text-xl">
-          Home
+          <Link to={"/"}>Home</Link>
         </button>
         <button className="text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
-          Favourites
+          <Link to={"/favourites"}>Favourites</Link>
         </button>
       </nav>
     </>
