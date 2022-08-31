@@ -20,7 +20,7 @@ const NavBar = () => {
           <Link to={"/"}>Home</Link>
         </button>
         <button className="text-white grid font-bold mt-2 ml-1 text-md sm:text-xl">
-          <Link to={"/favourites"}>Favourites</Link>
+          <Link to={"/Favourite"}>Favourites</Link>
         </button>
       </nav>
     </>
