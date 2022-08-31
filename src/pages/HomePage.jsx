@@ -11,7 +11,7 @@ export default class HomePage extends Component {
   };
 
 componentDidMount =()=>{
-  axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=1')
+  axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
   .then((response) => {
     const { results } = response.data;
     if (results){
