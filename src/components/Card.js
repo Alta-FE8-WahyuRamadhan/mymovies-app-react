@@ -1,6 +1,6 @@
 const Card = ({ image, title, rating }) => {
   return (
-    <div className="bg-yellow-500/50 w-40 h-auto py-2 rounded-lg grid place-content-center px-1">
+    <div className="bg-yellow-500/50 w-40 ml-5 h-auto py-2 rounded-lg grid place-content-center px-1">
       <div className="flex justify-center">
         <img
           src={
