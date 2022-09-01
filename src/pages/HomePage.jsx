@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
+import { withRouter } from "../withRouter";
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   state = {
     title: [],
     page: 1,
@@ -29,6 +30,16 @@ export default class HomePage extends Component {
       });
   };
 
+  handleDetailPage(item) {
+    this.props.navigate("/detail", {
+      state: {
+        lang:item.original_language,
+        overview:item.overview,
+      },
+    });
+    console.log(this.state.lang)
+  }
+
   previousPage(){
     if(this.state.page>1){
       this.setState({
@@ -48,15 +59,19 @@ export default class HomePage extends Component {
     return (
       <>
       <NavBar/>
-      <div className="px-6 py-6 bg-gradient-to-r from-cyan-500 to-blue-500 h-auto w-full">
+      <div className="px-6 py-6 bg-gradient-to-r from-teal-400 to-blue-800 h-auto w-full">
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3'>
+        
+
         {this.state.title.map((item, index) => {
             return (
               <div key={index}>
-              <Card title={item.title} image={item.poster_path} rating={item.vote_average}/>
+              <Card title={item.title} image={item.poster_path} rating={item.vote_average} lang={item.original_language} overview={item.overview} klik={()=>this.handleDetailPage(item)}/>
               </div>
             );
           })}
+
+
         </div>
         <p>Halaman :{this.state.page}</p>
         <div className='flex justify-center'>
@@ -69,3 +84,4 @@ export default class HomePage extends Component {
   }
 }
 
+export default withRouter(HomePage);
