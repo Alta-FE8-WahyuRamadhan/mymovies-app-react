@@ -6,7 +6,7 @@ const Card = ({ title, image, rating }) => {
       <div className="flex justify-center">
         <img
           src={
-            "https://image.tmdb.org/t/p/original/" + image
+            image
               ? "https://image.tmdb.org/t/p/original/" + image
               : "https://via.placeholder.com/500x750.png/000000/FFFFFF/%20C/O%20https://placeholder.com/?text=No+image"
           }
