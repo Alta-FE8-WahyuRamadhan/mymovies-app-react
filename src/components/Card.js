@@ -1,6 +1,8 @@
-const Card = ({ title, image }) => {
+import { RiStarSFill } from "react-icons/ri";
+
+const Card = ({ title, image, rating }) => {
   return (
-    <div className="bg-yellow-500/50 w-40 ml-5 h-auto py-2 rounded-lg grid place-content-center px-1">
+    <div className="bg-yellow-500/50 w-40 h-auto py-2 rounded-lg grid place-content-center px-1 sm:ml-5">
       <div className="flex justify-center">
         <img
           src={
@@ -13,6 +15,10 @@ const Card = ({ title, image }) => {
         />
       </div>
       <h3 className="text-center font-bold text-white">{title}</h3>
+      <h3 className="font-normal italic text-yellow-300 flex text-center ml-1 mt-1">
+        <RiStarSFill className="text-2xl" />
+        {rating}/10
+      </h3>
     </div>
   );
 };
