@@ -1,38 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { withRouter } from "../withRouter";
-// 
 
-class HomePage extends Component {
-  state = {
-    title: [],
-    page: 1,
-  };
 
-  componentDidMount() {
-    this.getData();
-    
-  };
+
+function HomePage() {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(()=>{
+    getData();
+  },[page]);
 
   
-  getData(page){
-    const self = this;
-    axios
+  const getData= async(page)=>{
+    await axios
       .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=${page}`)
-      .then(function (response) {
-        self.setState({
-          title: response.data.results,
-        });
+      .then((response)=> {
+          setTitle(response.data.results)
       })
-      .catch(function (error) {
+      .catch((error)=> {
         alert(error);
       });
   };
 
-  handleDetailPage(item) {
-    this.props.navigate("/detail", {
+  const handleDetailPage=(item)=>{
+    navigate(`/detail/${item.id}`, {
       state: {
         title:item.title,
         image:item.poster_path,
@@ -47,22 +44,18 @@ class HomePage extends Component {
     });
   }
 
-  previousPage(){
-    if(this.state.page>1){
-      this.setState({
-        page: this.state.page - 1
-      })}
-    this.getData(this.state.page)
+  const previousPage =()=>{
+    if(page>1){
+      setPage(page-1)}
+    getData(page)
   };
   
-  nextPage(){
-      this.setState({
-        page: this.state.page + 1
-      })
-      this.getData(this.state.page)
+  const nextPage=()=>{
+    setPage(page+1)
+    getData(page)
   };
 
-  render() {
+  
     return (
       <>
       <NavBar/>
@@ -70,25 +63,24 @@ class HomePage extends Component {
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3'>
         
 
-        {this.state.title.map((item, index) => {
+        {title.map((item, index) => {
             return (
               <div key={index}>
-              <Card title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} release_date={item.release_date} overview={item.overview} vote_average={item.vote_average} klik={()=>this.handleDetailPage(item)}/>
+              <Card title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} release_date={item.release_date} overview={item.overview} vote_average={item.vote_average} klik={()=>handleDetailPage(item)}/>
               </div>
             );
           })}
 
 
         </div>
-        <p>Halaman :{this.state.page}</p>
+        <p>Halaman :{page}</p>
         <div className='flex justify-center'>
-          <button className ='rounded-full mr-2 w-36 text-white bg-blue-700/50 font-bold' onClick={(value) => this.previousPage(value)}>Previous Page</button>
-          <button className ='rounded-full w-36 text-white bg-blue-700/50 font-bold' onClick={(value) => this.nextPage(value)}>Next Page</button>
+          <button className ='rounded-full mr-2 w-36 text-white bg-blue-700/50 font-bold' onClick={(value) => previousPage(value)}>Previous Page</button>
+          <button className ='rounded-full w-36 text-white bg-blue-700/50 font-bold' onClick={(value) => nextPage(value)}>Next Page</button>
         </div>
       </div>
       </>
     )
   }
-}
 
 export default withRouter(HomePage);
