@@ -3,6 +3,7 @@ import Card from '../components/Card';
 import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { withRouter } from "../withRouter";
+// 
 
 class HomePage extends Component {
   state = {
@@ -19,7 +20,7 @@ class HomePage extends Component {
   getData(page){
     const self = this;
     axios
-      .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=id-US&page=${page}`)
+      .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=47182bd87a80c318c05c57ae7d42b9e2&language=en-US&page=${page}`)
       .then(function (response) {
         self.setState({
           title: response.data.results,
@@ -33,11 +34,17 @@ class HomePage extends Component {
   handleDetailPage(item) {
     this.props.navigate("/detail", {
       state: {
+        title:item.title,
+        image:item.poster_path,
+        backdrop_path:item.backdrop_path,
+        popularity:item.popularity,
         lang:item.original_language,
         overview:item.overview,
+        vote_count:item.vote_count,
+        vote_average:item.vote_average,
+        release_date:item.release_date
       },
     });
-    console.log(this.state.lang)
   }
 
   previousPage(){
@@ -66,7 +73,7 @@ class HomePage extends Component {
         {this.state.title.map((item, index) => {
             return (
               <div key={index}>
-              <Card title={item.title} image={item.poster_path} rating={item.vote_average} lang={item.original_language} overview={item.overview} klik={()=>this.handleDetailPage(item)}/>
+              <Card title={item.title} image={item.poster_path} backdrop_path={item.backdrop_path} rating={item.vote_average} popularity={item.popularity} lang={item.original_language} vote_count={item.vote_count} release_date={item.release_date} overview={item.overview} vote_average={item.vote_average} klik={()=>this.handleDetailPage(item)}/>
               </div>
             );
           })}

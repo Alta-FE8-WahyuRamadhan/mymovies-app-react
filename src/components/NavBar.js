@@ -2,7 +2,7 @@ import { MdOutlineLocalMovies } from "react-icons/md";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ theme }) => {
   return (
     <>
       <nav className="sticky top-0 w-full h-14 bg-neutral-700 px-3 py-1 flex justify-between">
