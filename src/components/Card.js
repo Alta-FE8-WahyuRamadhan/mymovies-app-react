@@ -1,6 +1,6 @@
 import { RiStarSFill } from "react-icons/ri";
 
-const Card = ({ title, image, rating, klik }) => {
+const Card = ({ title, image, rating, klik, fav }) => {
   return (
     <div className="bg-yellow-500/50 w-40 h-auto py-2 rounded-lg grid place-content-center px-1 sm:ml-5">
       <div className="flex justify-center">
@@ -19,12 +19,20 @@ const Card = ({ title, image, rating, klik }) => {
         <RiStarSFill className="text-2xl" />
         {rating}/10
       </h3>
-      <button
-        className="rounded-full mx-auto w-36 text-white bg-blue-700/50 font-bold"
-        onClick={klik}
-      >
-        Detail
-      </button>
+      <div className="grid gap-1">
+        <button
+          className="rounded-full mx-auto w-36 text-white bg-blue-700/50 font-bold"
+          onClick={klik}
+        >
+          Detail
+        </button>
+        <button
+          className="rounded-full mx-auto w-36 text-white bg-blue-700/50 font-bold"
+          onClick={fav}
+        >
+          Add to Favourites
+        </button>
+      </div>
     </div>
   );
 };
